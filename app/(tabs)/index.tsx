@@ -75,7 +75,7 @@ export default function HomeScreen() {
       } as any);
 
       try {
-        const { data } = await axios.post(
+        const { data } = await axios.postForm(
           `https://chat.stream-io-api.com/channels/messaging/c3840f01-a54c-4563-9bb1-2d220a89d83c/image?user_id=khushalagarwalgetstreamio&connection_id=65e9ec5e-0a09-243b-0000-00000219d991&api_key=v3weqm7meazf`,
           formData,
           {
@@ -116,6 +116,12 @@ export default function HomeScreen() {
       <Button title="Image Picker" onPress={openImagePicker} />
       <Button title="Open Camera Picker" onPress={openCameraPicker} />
       <Button title="Upload Photo" onPress={uploadPhoto} />
+      {photo && (
+        <Image
+          source={{ uri: photo.uri }}
+          style={{ width: 200, height: 200 }}
+        />
+      )}
     </ParallaxScrollView>
   );
 }
