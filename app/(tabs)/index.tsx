@@ -65,7 +65,8 @@ export default function HomeScreen() {
   const uploadPhoto = async () => {
     if (photo) {
       const uri = photo.uri;
-      const filename = photo.fileName;
+      const filename =
+        photo.fileName || uri.replace(/^(file:\/\/|content:\/\/)/, "");
       const type = photo.mimeType;
       const formData = new FormData();
 
