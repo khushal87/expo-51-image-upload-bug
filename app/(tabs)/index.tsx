@@ -91,7 +91,7 @@ export default function HomeScreen() {
             },
           }
         );
-        console.log(response);
+        console.log(response.data);
         if (response) {
           alert("Image Uploaded");
         }
