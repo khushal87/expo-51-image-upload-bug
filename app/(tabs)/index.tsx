@@ -68,31 +68,32 @@ export default function HomeScreen() {
       const filename = photo.fileName;
       const type = photo.mimeType;
       const formData = new FormData();
-      formData.append("image", {
+
+      formData.append("file", {
         uri,
         name: filename,
+        contentType: type,
         type,
       } as any);
 
       try {
-        const { data } = await axios.postForm(
+        const response = await axios.postForm(
           `https://chat.stream-io-api.com/channels/messaging/c3840f01-a54c-4563-9bb1-2d220a89d83c/image?user_id=khushalagarwalgetstreamio&connection_id=65e9ec5e-0a09-243b-0000-00000219d991&api_key=v3weqm7meazf`,
           formData,
           {
             headers: {
-              "Content-Type": "multipart/form-data",
               "Stream-Auth-Type": "jwt",
               Authorization:
                 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoia2h1c2hhbGFnYXJ3YWxnZXRzdHJlYW1pbyJ9.8Pw06BSDDk1BLiho10CYTvtglUH00rakVhGpkFDt-NE",
             },
           }
         );
-        if (!data.isSuccess) {
-          alert("Image upload failed!");
-          return;
+        console.log(response);
+        if (response) {
+          alert("Image Uploaded");
         }
-        alert("Image Uploaded");
       } catch (err: unknown) {
+        console.log(err);
         if (axios.isAxiosError(err)) {
           console.log(err.response?.data);
           alert("Something went wrong");
