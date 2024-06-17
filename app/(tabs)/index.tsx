@@ -33,6 +33,7 @@ export default function HomeScreen() {
       const assets = imagePickerSuccessResult.assets;
       // since we only support single photo upload for now we will only be focusing on 0'th element.
       const photo = assets && assets[0];
+      console.log(photo);
       setPhoto(photo);
     }
   };
@@ -54,6 +55,7 @@ export default function HomeScreen() {
       const assets = imagePickerSuccessResult.assets;
       // since we only support single photo upload for now we will only be focusing on 0'th element.
       const photo = assets && assets[0];
+      console.log(photo);
       setPhoto(photo);
     }
   };
@@ -65,7 +67,8 @@ export default function HomeScreen() {
   const uploadPhoto = async () => {
     if (photo) {
       const uri = photo.uri;
-      const filename = photo.fileName;
+      const filename =
+        photo.fileName || uri.replace(/^(file:\/\/|content:\/\/)/, "");
       const type = photo.mimeType;
       const formData = new FormData();
 
